@@ -152,7 +152,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
     setIsFirstLoad(false);
     return unsubscribe;
   }, [messages]);
-  console.log(newMessages);
+
   useEffect(() => {
     async function addImgToStorage() {
       try {
