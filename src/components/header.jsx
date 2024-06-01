@@ -7,7 +7,7 @@ export function Header({ cookie, name, photo }) {
     await signOut(auth);
 
     cookie.remove("auth-token");
-    nav("/");
+    nav("/chat-app/");
     localStorage.removeItem("name");
     localStorage.removeItem("photo");
   }

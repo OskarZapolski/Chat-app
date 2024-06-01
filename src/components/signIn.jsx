@@ -33,7 +33,7 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
         localStorage.setItem("name", nameRef.current.value);
         localStorage.setItem("photo", profilePhoto);
 
-        nav(`/messenger`);
+        nav(`/chat-app/messenger`);
       } catch (err) {
         console.error(err);
       }
@@ -95,7 +95,7 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
         });
       }
       setIsUserFromGoogle(true);
-      nav(`/messenger`);
+      nav(`/chat-app/messenger`);
     } catch (err) {
       console.error(err);
     }
@@ -114,13 +114,13 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
           localStorage.setItem("photo", user.data().photo);
         }
       });
-      nav("/messenger");
+      nav("/chat-app/messenger");
     }
   }
 
   useEffect(() => {
     if (localStorage.getItem("name")) {
-      nav(`/messenger`);
+      nav(`/chat-app/messenger`);
     }
   }, []);
   return (

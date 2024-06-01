@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignIn } from "./components/signIn";
-import { auth } from "./config/firebase-config";
+
 import { Messenger } from "./components/messenger";
 import Cookies from "universal-cookie";
 import { useState } from "react";
@@ -15,14 +15,14 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/"
+          path="/chat-app/"
           element={
             <SignIn cookie={cookie} setIsUserFromGoogle={setIsUserFromGoogle} />
           }
         />
         <Route
           exact
-          path={`/messenger`}
+          path={`/chat-app/messenger`}
           element={
             <Messenger cookie={cookie} isUserFromGoogle={isUserFromGoogle} />
           }
