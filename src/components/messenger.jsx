@@ -124,11 +124,18 @@ export function Messenger({ cookie, isUserFromGoogle }) {
             if (snap.data().room.includes(Name)) {
               setNewMessages((prev) =>
                 prev.map((possibleMess) => {
-                  if (room === snap.data().room) {
+                  if (snap.data().wasSeen === true) {
+                    return possibleMess;
+                  }
+                  if (
+                    room === snap.data().room &&
+                    room &&
+                    snap.data().user != Name
+                  ) {
                     updateMessage(snap.id);
                   } else {
                     if (room.includes(snap.data().user) === false) {
-                      if (!possibleMess.text || possibleMess.wasSeen) {
+                      if (!possibleMess.text || snap.data().wasSeen === false) {
                         if (possibleMess.room === snap.data().room) {
                           return {
                             ...possibleMess,
