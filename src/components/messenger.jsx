@@ -34,19 +34,21 @@ export function Messenger({ cookie, isUserFromGoogle }) {
   const [imageFullName, setImageFullName] = useState("");
   const [newMessages, setNewMessages] = useState([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const [widthWindow, setWidthWindow] = useState(false);
+  const [isSmallWindow, setIsSmallWindow] = useState(false);
+  const [widthWindow, setWidthWindow] = useState(window.innerWidth);
 
   const Name = localStorage.getItem("name");
   const Photo = localStorage.getItem("photo");
 
   const styles = {
     users: {
-      display: room && widthWindow ? "none" : "block",
-      width: !room && widthWindow ? "100vw" : !widthWindow && "17vw",
+      display: room && isSmallWindow ? "none" : "block",
+      width: !room && isSmallWindow ? "100vw" : !isSmallWindow && "17vw",
     },
     form: {
-      width: room && widthWindow && "93vw",
-      display: room && widthWindow ? "block" : !widthWindow ? "block" : "none",
+      width: room && isSmallWindow && "93vw",
+      display:
+        room && isSmallWindow ? "block" : !isSmallWindow ? "block" : "none",
     },
   };
 
@@ -77,17 +79,23 @@ export function Messenger({ cookie, isUserFromGoogle }) {
 
     return () => unsubscribe();
   }, []);
+
   useEffect(() => {
     function resizeHandler() {
-      if (window.innerWidth <= 750 && !widthWindow) {
-        setWidthWindow(true);
-      } else if (window.innerWidth > 750 && widthWindow) {
-        setWidthWindow(false);
-      }
+      setWidthWindow(window.innerWidth);
     }
     window.addEventListener("resize", resizeHandler);
-    return () => window.removeEventListener("resize", resizeHandler);
-  }, [window.innerWidth]);
+
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    if (widthWindow <= 750 && !isSmallWindow) {
+      setIsSmallWindow(true);
+    } else if (widthWindow > 750 && isSmallWindow) {
+      setIsSmallWindow(false);
+    }
+  }, [widthWindow]);
 
   useEffect(() => {
     const q = query(
