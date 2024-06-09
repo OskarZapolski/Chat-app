@@ -294,10 +294,11 @@ form {
 @media only screen and (max-width: 750px) {
   .users {
     width: 100%;
-    padding-bottom: 120px;
+    padding-bottom: 180px;
   }
   form {
     width: 0;
+    padding-bottom: 50px;
   }
 
   .user {
