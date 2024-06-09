@@ -294,13 +294,15 @@ form {
 @media only screen and (max-width: 750px) {
   .users {
     width: 100%;
-    padding-bottom: 180px;
+    padding-bottom: 120px;
   }
   form {
     width: 0;
-    padding-bottom: 50px;
+    margin-bottom: 50px;
   }
-
+  .users-container {
+    margin-bottom: 50px;
+  }
   .user {
     background-color: rgb(221, 221, 221);
     width: 50%;
