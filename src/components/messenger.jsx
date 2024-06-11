@@ -177,7 +177,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
           const imageRef = ref(storage, `images/${url}`);
 
           await uploadBytes(imageRef, uploadImage);
-          setMessageText("image");
+          setMessageText(uploadImage.name);
         }
       } catch (err) {
         console.error(err);

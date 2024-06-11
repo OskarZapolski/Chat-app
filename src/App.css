@@ -229,6 +229,7 @@ form {
   background-repeat: no-repeat;
   padding: 10px;
   border-radius: 15px;
+  cursor: pointer;
 }
 .user {
   width: fit-content;
