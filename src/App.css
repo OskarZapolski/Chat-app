@@ -15,6 +15,10 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
 }
+.h1 {
+  margin-bottom: 30px;
+  font-size: 55px;
+}
 .container {
   width: 100vw;
   height: 100vh;
@@ -231,6 +235,7 @@ form {
   border-radius: 15px;
   cursor: pointer;
 }
+
 .user {
   width: fit-content;
   display: flex;
@@ -281,6 +286,9 @@ form {
   text-transform: uppercase;
   font-size: 25px;
 }
+.image-container {
+  width: 100%;
+}
 .arrow-back {
   display: none;
 }
@@ -290,6 +298,9 @@ form {
   }
   h1 {
     font-size: 30px;
+  }
+  .h1 {
+    font-size: 35px;
   }
 }
 @media only screen and (max-width: 750px) {

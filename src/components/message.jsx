@@ -18,15 +18,26 @@ export function Message({ text, user, photo, uploadImage, currentUser }) {
   const textStyle = {
     backgroundColor: user === currentUser && `rgb(0, 162, 255)`,
 
-    width: isImgScaled && "60%",
-    maxWidth: isImgScaled && "700px",
+    width: isImgScaled && "45%",
+
+    maxWidth: isImgScaled && "600px",
+    maxHeight: isImgScaled && "680px",
+
+    backdropFilter: isImgScaled && "blur(5px)",
+  };
+  const divImageContainerStyle = {
     position: isImgScaled && "absolute",
     left: isImgScaled && "50%",
     top: isImgScaled && "50%",
     transform: isImgScaled && "translate(-50%,-50%)",
     zIndex: isImgScaled && "10",
+    display: isImgScaled && "flex",
 
-    backdropFilter: isImgScaled && "blur(5px)",
+    justifyContent: isImgScaled && "center",
+    alignItems: isImgScaled && "center",
+    height: isImgScaled && "100vh",
+    width: isImgScaled && "100vw",
+    backdropFilter: isImgScaled && "blur(2px)",
   };
 
   async function getImages() {
@@ -49,13 +60,15 @@ export function Message({ text, user, photo, uploadImage, currentUser }) {
           <div style={divStyle} className="who-sent-photo"></div>
         )}
         {uploadImage ? (
-          <img
-            src={sendUrl}
-            alt=""
-            className="send-img"
-            style={textStyle}
-            onClick={() => setIsImgScaled((prev) => !prev)}
-          />
+          <div className="image-container" style={divImageContainerStyle}>
+            <img
+              src={sendUrl}
+              alt=""
+              className="send-img"
+              style={textStyle}
+              onClick={() => setIsImgScaled((prev) => !prev)}
+            />
+          </div>
         ) : (
           <p className="message-text" style={textStyle}>
             {text}

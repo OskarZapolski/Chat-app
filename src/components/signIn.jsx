@@ -125,6 +125,7 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
   }, []);
   return (
     <div className="container">
+      <h1 className="h1">Chat app</h1>
       <div className="signIn-popup">
         <label htmlFor="email">Email</label>
         <input
