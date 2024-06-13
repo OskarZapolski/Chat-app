@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { auth, db, storage } from "../config/firebase-config";
+import { db, storage } from "../config/firebase-config";
 import { Header } from "./header";
 import {} from "firebase/auth";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import {
   collection,
   query,
@@ -10,7 +10,6 @@ import {
   addDoc,
   serverTimestamp,
   orderBy,
-  getDocs,
   where,
   updateDoc,
   doc,
