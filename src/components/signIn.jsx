@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, query, getDocs, addDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { LogIn } from "./logIn";
 
 export function SignIn({ cookie, setIsUserFromGoogle }) {
   const nav = useNavigate();
@@ -100,29 +101,13 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
       console.error(err);
     }
   }
-  async function logIn() {
-    if (emailRef.current.value && passRef.current.value) {
-      await signInWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        passRef.current.value
-      );
-      const users = await getDocs(q);
-      users.forEach((user) => {
-        if (user.data().email === emailRef.current.value) {
-          localStorage.setItem("name", user.data().name);
-          localStorage.setItem("photo", user.data().photo);
-        }
-      });
-      nav("/chat-app/messenger");
-    }
-  }
 
   useEffect(() => {
     if (localStorage.getItem("name")) {
       nav(`/chat-app/messenger`);
     }
   }, []);
+
   return (
     <div className="container">
       <h1 className="h1">Chat app</h1>
@@ -164,9 +149,7 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
             </button>
           </>
         ) : (
-          <button className="btn-create-acc btn" onClick={logIn}>
-            Login
-          </button>
+          <LogIn emailRef={emailRef} passRef={passRef} q={q} />
         )}
       </div>
       <div className="div-wrapper">
