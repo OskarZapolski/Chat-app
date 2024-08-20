@@ -14,6 +14,8 @@ body {
   overflow-y: hidden;
   font-family: "Roboto", sans-serif;
   font-size: 20px;
+  background-color: black;
+  color: rgb(226, 224, 224);
 }
 .h1 {
   margin-bottom: 30px;
@@ -106,13 +108,18 @@ body {
   width: 150px;
   padding: 5px 7px;
   background-color: black;
-  color: white;
+  color: rgb(181, 180, 180);
   border: none;
   border-radius: 10px;
   cursor: pointer;
   font-size: 25px;
+  border: 2px solid white;
+  transition: all 0.3s ease-in-out;
 }
-
+.btn-sign-out:hover {
+  transform: scale(1.2);
+  color: rgb(255, 253, 253);
+}
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -182,6 +189,8 @@ form {
   border-bottom-left-radius: 20px;
   border: 1px solid gray;
   width: 80%;
+  background-color: rgb(36, 36, 36);
+  color: rgb(222, 222, 222);
 }
 
 .message {
@@ -206,6 +215,9 @@ form {
 .image-container {
   width: 100%;
 }
+.upload-img {
+  width: 50%;
+}
 .send-img {
   width: 40%;
   max-width: 200px;
@@ -227,7 +239,7 @@ form {
   cursor: pointer;
   font-size: 20px;
   border: 1px solid gray;
-  background-color: white;
+  background-color: rgb(36, 36, 36);
   width: 6%;
 
   display: flex;
@@ -235,7 +247,7 @@ form {
   align-items: center;
 }
 .load-img > img {
-  width: 60%;
+  width: 40%;
 }
 .file-input {
   visibility: hidden;
@@ -245,11 +257,14 @@ form {
   cursor: pointer;
   font-size: 20px;
   border: 1px solid gray;
-  background-color: white;
+  background-color: rgb(36, 36, 36);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 10px;
   width: 8%;
+}
+.send-btn > img {
+  width: 40%;
 }
 .select-chat {
   width: 80%;
@@ -271,7 +286,7 @@ form {
   cursor: pointer;
 }
 .user:hover {
-  background-color: rgb(202, 202, 202);
+  background-color: rgb(51, 51, 51);
 }
 .user > p {
   inline-size: 80px;

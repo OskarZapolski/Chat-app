@@ -278,7 +278,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
                 }}
               />
               <label htmlFor="files" className="load-img">
-                <img src="uploadImg.jpg" alt="" />
+                <img src="uploadImg-48.png" alt="" className="upload-img" />
               </label>
               <input
                 type="file"
@@ -291,7 +291,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
                 }}
               />
               <button className="send-btn">
-                <img src="message-send.png" alt="" />
+                <img src="send48.png" alt="" />
               </button>
             </div>
           </form>
