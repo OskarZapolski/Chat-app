@@ -15,6 +15,7 @@ export function User({
   id,
 }) {
   const [photoUrl, setPhotoUrl] = useState("");
+  const [text, setText] = useState("");
 
   const style = {
     backgroundImage: `url(${photoUrl})`,
@@ -38,6 +39,17 @@ export function User({
       console.error(err);
     }
   }, []);
+
+  useEffect(() => {
+    setText(
+      newMessages.map((message) => {
+        if (message.room.includes(name) && message.wasSeen === false) {
+          console.log(message);
+          return message.text;
+        }
+      })
+    );
+  }, [newMessages]);
 
   async function updateMessage(id) {
     try {
@@ -68,13 +80,20 @@ export function User({
     }
   });
 
+  const styleUserInfo = {
+    justifyContent: text !== "" ? "space-around" : "center",
+  };
+
   return (
     <div className="user" onClick={() => findRoom()} key={id}>
       <div style={style} className="photo">
         {dot}
       </div>
 
-      <p>{name}</p>
+      <div className="user-info" style={styleUserInfo}>
+        <p className="user-nick">{name}</p>
+        {text && <p className="new-message-popup-text">{text}</p>}
+      </div>
     </div>
   );
 }

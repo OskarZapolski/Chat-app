@@ -42,7 +42,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
   const styles = {
     users: {
       display: room && isSmallWindow ? "none" : "block",
-      width: !room && isSmallWindow ? "100vw" : !isSmallWindow && "17vw",
+      width: !room && isSmallWindow ? "100vw" : !isSmallWindow && "25vw",
     },
     form: {
       width: room && isSmallWindow && "93vw",
@@ -126,14 +126,13 @@ export function Messenger({ cookie, isUserFromGoogle }) {
         let count = 0;
         snapshot.forEach((snap) => {
           if ((!isFirstLoad && count === 0) || isFirstLoad) {
-            count++;
-
             if (snap.data().room.includes(Name)) {
               setNewMessages((prev) =>
                 prev.map((possibleMess) => {
                   if (snap.data().wasSeen === true) {
                     return possibleMess;
                   }
+                  console.log();
                   if (
                     room === snap.data().room &&
                     room &&
@@ -141,9 +140,21 @@ export function Messenger({ cookie, isUserFromGoogle }) {
                   ) {
                     updateMessage(snap.id);
                   } else {
+                    if (possibleMess.text && snap.data().wasSeen === false) {
+                      if (possibleMess.createdAt > snap.data().createdAt) {
+                        updateMessage(snap.id);
+                      } else {
+                        updateMessage(possibleMess.id);
+                      }
+
+                      console.log(1);
+                      console.log(snap.data());
+                    }
+
                     if (room.includes(snap.data().user) === false) {
                       if (!possibleMess.text || snap.data().wasSeen === false) {
                         if (possibleMess.room === snap.data().room) {
+                          console.log(snap.data());
                           return {
                             ...possibleMess,
                             ...snap.data(),
@@ -166,7 +177,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
     setIsFirstLoad(false);
     return unsubscribe;
   }, [messages]);
-
+  console.log(newMessages);
   useEffect(() => {
     async function addImgToStorage() {
       try {

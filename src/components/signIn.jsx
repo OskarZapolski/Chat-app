@@ -22,6 +22,10 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
   const [profilePhoto, setProfilePhoto] = useState("");
   const [isNewUser, setIsNewUser] = useState(false);
 
+  const style = {
+    backgroundImage: "url('logIn.jpg')",
+  };
+
   useEffect(() => {
     async function load() {
       try {
@@ -109,59 +113,68 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
   }, []);
 
   return (
-    <div className="container">
-      <h1 className="h1">Chat app</h1>
-      <div className="signIn-popup">
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          placeholder="something@gmail.com"
-          id="email"
-          ref={emailRef}
-          className="create-acc-input"
-        />
-        <label htmlFor="pass">Password</label>
-        <input
-          type="password"
-          placeholder="passExample123"
-          id="pass"
-          ref={passRef}
-          className="create-acc-input"
-        />
-        {!isNewUser ? (
-          <>
-            <label htmlFor="name">User name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="example user"
-              ref={nameRef}
-              className="create-acc-input"
-            />
-            <label htmlFor="">Select your picture</label>
-            <input
-              type="file"
-              className="input-file"
-              onChange={(e) => setPicture(e.target.files[0])}
-            />
-            <button className="btn-create-acc btn" onClick={createAccount}>
-              Create account
+    <div className="container ">
+      <div className="logoImg" style={style}></div>
+      <div className="signIn-body-wrapper">
+        <div className="signIn-body">
+          <h1 className="h1">Chat app</h1>
+          <div className="signIn-popup">
+            <div className="input-with-placeholder">
+              <input
+                required
+                type="text"
+                id="email"
+                ref={emailRef}
+                className="create-acc-input"
+              />
+              <label htmlFor="email">Email</label>
+            </div>
+            <div className="input-with-placeholder">
+              <input
+                type="password"
+                id="pass"
+                ref={passRef}
+                className="create-acc-input"
+              />
+              <label htmlFor="pass">Password</label>
+            </div>
+            {!isNewUser ? (
+              <>
+                <div className="input-with-placeholder">
+                  <input
+                    type="text"
+                    id="name"
+                    ref={nameRef}
+                    className="create-acc-input"
+                  />
+                  <label htmlFor="name">User name</label>
+                </div>
+                <label htmlFor="">Select your picture</label>
+                <input
+                  type="file"
+                  className="input-file"
+                  onChange={(e) => setPicture(e.target.files[0])}
+                />
+                <button className="btn-create-acc btn" onClick={createAccount}>
+                  Create account
+                </button>
+              </>
+            ) : (
+              <LogIn emailRef={emailRef} passRef={passRef} q={q} />
+            )}
+          </div>
+          <div className="div-wrapper">
+            <button className="signIn btn" onClick={signInWithGoogle}>
+              <img src="google.png" alt="" className="google-icon" />
             </button>
-          </>
-        ) : (
-          <LogIn emailRef={emailRef} passRef={passRef} q={q} />
-        )}
-      </div>
-      <div className="div-wrapper">
-        <button className="signIn btn" onClick={signInWithGoogle}>
-          Sign In with google
-        </button>
-        <button
-          className="logIn-btn btn"
-          onClick={() => setIsNewUser((prev) => !prev)}
-        >
-          {isNewUser ? "create account" : "Login"}
-        </button>
+            <button
+              className="logIn-btn btn"
+              onClick={() => setIsNewUser((prev) => !prev)}
+            >
+              {isNewUser ? "create account" : "Login"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

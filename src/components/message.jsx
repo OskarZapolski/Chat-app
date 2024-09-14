@@ -16,7 +16,8 @@ export function Message({ text, user, photo, uploadImage, currentUser }) {
   };
 
   const textStyle = {
-    backgroundColor: user === currentUser && `rgb(0, 162, 255)`,
+    backgroundColor:
+      user === currentUser ? `rgb(0, 162, 255)` : "rgb(71, 71, 71)",
 
     width: isImgScaled && "45%",
 
