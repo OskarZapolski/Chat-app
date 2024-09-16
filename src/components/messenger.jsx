@@ -283,6 +283,11 @@ export function Messenger({ cookie, isUserFromGoogle }) {
                 onChange={(e) => {
                   if (!uploadImage) setMessageText(e.target.value);
                 }}
+                onKeyDown={(e) => {
+                  if (uploadImage && e.code === "Backspace") {
+                    setMessageText("");
+                  }
+                }}
               />
               <label htmlFor="files" className="load-img">
                 <img src="uploadImg-48.png" alt="" className="upload-img" />

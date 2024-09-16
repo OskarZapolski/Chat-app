@@ -131,6 +131,7 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
             </div>
             <div className="input-with-placeholder">
               <input
+                required
                 type="password"
                 id="pass"
                 ref={passRef}
