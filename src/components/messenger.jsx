@@ -132,7 +132,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
                   if (snap.data().wasSeen === true) {
                     return possibleMess;
                   }
-                  console.log();
+
                   if (
                     room === snap.data().room &&
                     room &&
@@ -146,15 +146,11 @@ export function Messenger({ cookie, isUserFromGoogle }) {
                       } else {
                         updateMessage(possibleMess.id);
                       }
-
-                      console.log(1);
-                      console.log(snap.data());
                     }
 
                     if (room.includes(snap.data().user) === false) {
                       if (!possibleMess.text || snap.data().wasSeen === false) {
                         if (possibleMess.room === snap.data().room) {
-                          console.log(snap.data());
                           return {
                             ...possibleMess,
                             ...snap.data(),
@@ -177,7 +173,7 @@ export function Messenger({ cookie, isUserFromGoogle }) {
     setIsFirstLoad(false);
     return unsubscribe;
   }, [messages]);
-  console.log(newMessages);
+
   useEffect(() => {
     async function addImgToStorage() {
       try {
