@@ -52,6 +52,17 @@ export function Messenger({ cookie, isUserFromGoogle }) {
   };
 
   useEffect(() => {
+    async function HelloMessage(user, sorted) {
+      await addDoc(messageRef, {
+        text: "hello new user",
+        createdAt: serverTimestamp(),
+        user: user.name,
+        room: `${sorted[0]}${sorted[1]}`,
+        photo: user.photo,
+        uploadImage: null,
+        wasSeen: false,
+      });
+    }
     const listUsers = [];
 
     const qUsers = query(collection(db, "users"));
@@ -124,8 +135,9 @@ export function Messenger({ cookie, isUserFromGoogle }) {
       query(messageRef, orderBy("createdAt", "desc")),
       (snapshot) => {
         let count = 0;
+
         snapshot.forEach((snap) => {
-          if ((!isFirstLoad && count === 0) || isFirstLoad) {
+          if (count === 0 || isFirstLoad) {
             if (snap.data().room.includes(Name)) {
               setNewMessages((prev) =>
                 prev.map((possibleMess) => {

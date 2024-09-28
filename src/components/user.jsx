@@ -44,7 +44,6 @@ export function User({
     setText(
       newMessages.map((message) => {
         if (message.room.includes(name) && message.wasSeen === false) {
-          console.log(message);
           return message.text;
         }
       })

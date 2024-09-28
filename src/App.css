@@ -89,6 +89,10 @@ body {
   background-color: black;
   color: white;
   cursor: pointer;
+  box-shadow: 0 2px #646363;
+}
+.btn-create-acc:active {
+  transform: translateY(4px);
 }
 .signIn {
   border: none;
@@ -278,6 +282,9 @@ form {
   background-color: rgb(36, 36, 36);
   color: rgb(222, 222, 222);
 }
+.message-input:focus {
+  outline: none;
+}
 
 .message {
   width: 95%;
@@ -446,7 +453,7 @@ form {
   }
   .user {
     background-color: var(--color-scroll2);
-    width: 30%;
+    width: 80%;
     padding: 20px;
   }
   .wrapper {
@@ -456,8 +463,10 @@ form {
     align-items: center;
   }
   .select-chat {
-    margin-bottom: 30px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;
+    border-bottom: 1px solid gray;
   }
   h1 {
     font-size: 24px;
@@ -491,7 +500,7 @@ form {
   }
   .chat {
     width: 100%;
-    height: 68%;
+    height: 75%;
   }
   .box {
     width: 100%;
@@ -507,8 +516,29 @@ form {
 }
 @media only screen and (max-width: 600px) {
   .container {
-    justify-content: start;
-    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+  .signIn-body-wrapper {
+    display: flex;
+    width: 90%;
+    height: 100%;
+  }
+  .signIn-body {
+    background-color: rgb(36, 36, 36);
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: fit-content;
+  }
+  .input-with-placeholder label {
+    height: 40px;
+  }
+  .logoImg {
+    display: none;
   }
   .create-acc-input {
     font-size: 25px;

@@ -5,7 +5,14 @@ import {
 } from "firebase/auth";
 import { auth, googleProvider, db, storage } from "../config/firebase-config";
 import { useNavigate } from "react-router-dom";
-import { collection, query, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  onSnapshot,
+} from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { LogIn } from "./logIn";
@@ -71,12 +78,38 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
         await getDownloadURL(imagesRef).then((res) => {
           setProfilePhoto(res);
         });
+        const docs = await getDocs(q);
+        docs.forEach((doc) => {
+          if (doc.data().name !== nameRef.current.value) {
+            HelloMessage(doc.data(), [doc.data().name, nameRef.current.value]);
+          }
+        });
+        addDoc(collection(db, "users"), {
+          name: nameRef.current.value,
+          email: nameRef.current.value,
+          photo: picture.name,
+        });
+      } else {
+        alert("error in the information provided");
       }
     } catch (err) {
       console.error(err);
     }
   }
+  const messageRef = collection(db, "messages");
 
+  async function HelloMessage(user, sorted) {
+    await addDoc(messageRef, {
+      text: "hello new user",
+      createdAt: serverTimestamp(),
+      user: user.name,
+      room: `${sorted[0]}${sorted[1]}`,
+      photo: user.photo,
+      uploadImage: null,
+      wasSeen: false,
+    });
+  }
+  //zrob hello message dla create acc
   async function signInWithGoogle() {
     try {
       let count = 0;
@@ -93,6 +126,12 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
         }
       });
       if (count === 0) {
+        docs.forEach((doc) => {
+          HelloMessage(
+            doc.data(),
+            [doc.data().name, auth.currentUser.displayName].sort()
+          );
+        });
         addDoc(collection(db, "users"), {
           name: auth.currentUser.displayName,
           email: auth.currentUser.email,
@@ -156,7 +195,7 @@ export function SignIn({ cookie, setIsUserFromGoogle }) {
                   className="input-file"
                   onChange={(e) => setPicture(e.target.files[0])}
                 />
-                <button className="btn-create-acc btn" onClick={createAccount}>
+                <button className="btn-create-acc " onClick={createAccount}>
                   Create account
                 </button>
               </>
